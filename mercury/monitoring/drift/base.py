@@ -1,5 +1,6 @@
 import numpy as np
 import seaborn as sns
+import itertools
 import matplotlib.pyplot as plt
 
 from abc import ABC, abstractmethod
@@ -100,7 +101,7 @@ class BaseBatchDriftDetector(ABC):
 
         return idx_feature
 
-    def plot_distribution_feature(self, idx_feature=None, name_feature=None, hist=True, ax=None, figsize=(8, 4)):
+    def plot_distribution_feature(self, idx_feature=None, name_feature=None, ax=None, figsize=(8, 4)):
         """
         Plots the distribution of a given feature for the source and the target datasets.
         The feature can be indicated by the index using the `idx_feature` parameter, or by the name using the
@@ -110,8 +111,6 @@ class BaseBatchDriftDetector(ABC):
                 index of the feature
             name_feature (string):
                 name of the feature
-            hist (boolean):
-                whether to show the histograms in the plot or not.
             ax (matplotlib.axes._subplots.AxesSubplot):
                 Axes object on which the data will be plotted. If not specified it creates one.
             figsize (tuple):
@@ -124,8 +123,9 @@ class BaseBatchDriftDetector(ABC):
         if ax is None:
             fig, ax = plt.subplots(1, 1, figsize=figsize)
 
-        axes = sns.distplot(self.X_src[:, idx_feature], hist=hist, ax=ax, label="dataset source")
-        axes = sns.distplot(self.X_target[:, idx_feature], hist=hist, ax=ax, label="dataset target")
+        palette = itertools.cycle(sns.color_palette())
+        axes = sns.histplot(self.X_src[:, idx_feature], kde=True, color=next(palette), ax=ax, label="dataset source")
+        axes = sns.histplot(self.X_target[:, idx_feature], kde=True, color=next(palette), ax=ax, label="dataset target")
         axes.legend()
         return axes
 
