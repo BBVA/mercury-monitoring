@@ -53,7 +53,7 @@ class PerformancePredictor:
 
                 1) A string with the type of drift to apply.
                 2) A dictionary with the parameters of the drift to apply. For the first element you can use any method available in
-                mercury.monitoring._drift_simulation.BatchDriftGenerator class. In the second element, the parameters are the
+                mercury.monitoring.estimation._drift_simulation.BatchDriftGenerator class. In the second element, the parameters are the
                 arguments of the drift function. You can see the tutorial of class or the BatchDriftGenerator documentation for more
                 details. If not specified the corruptions will be added in the `fit()` method according to the drift detected.
                 (NOTE: The location of the BatchDriftGenerator class is temporary and it will be moved in next releases)
