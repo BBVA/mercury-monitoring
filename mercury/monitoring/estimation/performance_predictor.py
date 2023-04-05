@@ -53,9 +53,10 @@ class PerformancePredictor:
 
                 1) A string with the type of drift to apply.
                 2) A dictionary with the parameters of the drift to apply. For the first element you can use any method available in
-                mercury.contrib.simulation.drift_simulation.BatchDriftGenerator class. In the second element, the parameters are the
+                mercury.monitoring._drift_simulation.BatchDriftGenerator class. In the second element, the parameters are the
                 arguments of the drift function. You can see the tutorial of class or the BatchDriftGenerator documentation for more
                 details. If not specified the corruptions will be added in the `fit()` method according to the drift detected.
+                (NOTE: The location of the BatchDriftGenerator class is temporary and it will be moved in next releases)
 
             percentiles: np.array or list with percentiles to calculate in model outputs to be used as features in the regressor.
                 By default, the calculated percentiles are [0, 5, 10, ..., 95, 100]
@@ -93,7 +94,7 @@ class PerformancePredictor:
         self,
         X: "pandas.DataFrame",  # noqa: F821
         y: Union["pandas.DataFrame", "np.array"],  # noqa: F821
-        dataset_schema: "mercury.contrib.dataschema.DataSchema" = None,  # noqa: F821
+        dataset_schema: "mercury.dataschema.DataSchema" = None,  # noqa: F821
         names_categorical: list = None,
         X_serving: "pandas.DataFrame" = None  # noqa: F821
     ):
