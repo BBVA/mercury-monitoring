@@ -118,10 +118,10 @@ class PerformancePredictor:
         if X_serving is not None:
             self.corruptions.extend(self._create_corruptions_from_data_drift(X, X_serving))
 
-        # if no corruptions have been added yet, raise a warning a create hyperplane rotation drift
-        if len(self.corruptions) == 0:
+        # if we have very few corruptions (less than param K_cv), raise a warning a create scale drift
+        if len(self.corruptions) <= self.K_cv:
             warnings.warn(
-                "Because no corruptions have been specied and no data drift is detected. "
+                "Very corruptions have been specified or created from data drift. "
                 "scale dirft will be added for all features individually")
             continous_feats = self.dataset_schema.continuous_feats + self.dataset_schema.discrete_feats
             for f in continous_feats:
