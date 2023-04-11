@@ -1,7 +1,6 @@
 import pytest
 
 import seaborn as sns
-import pandas as pd
 import numpy as np
 
 from mercury.monitoring.drift.drift_simulation import BatchDriftGenerator
