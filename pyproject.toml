@@ -24,7 +24,7 @@ dependencies = [
   'seaborn',
   'mercury-dataschema',
   'scipy',
-  'tensorflow>=1.15, <= 2.10',
+  'tensorflow>=1.15',
   'matplotlib>=3.0.2'
 ]
 

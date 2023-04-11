@@ -5,8 +5,8 @@ from typing import List, Tuple, Callable, Union
 
 from mercury.monitoring.drift.ks_drift_detector import KSDrift
 from mercury.monitoring.drift.chi2_drift_detector import Chi2Drift
+from mercury.monitoring.drift.drift_simulation import BatchDriftGenerator
 from mercury.dataschema import DataSchema
-from ._drift_simulation import BatchDriftGenerator
 
 import warnings
 
@@ -53,10 +53,9 @@ class PerformancePredictor:
 
                 1) A string with the type of drift to apply.
                 2) A dictionary with the parameters of the drift to apply. For the first element you can use any method available in
-                mercury.monitoring.estimation._drift_simulation.BatchDriftGenerator class. In the second element, the parameters are the
+                mercury.monitoring.drift.drift_simulation.BatchDriftGenerator class. In the second element, the parameters are the
                 arguments of the drift function. You can see the tutorial of class or the BatchDriftGenerator documentation for more
                 details. If not specified the corruptions will be added in the `fit()` method according to the drift detected.
-                (NOTE: The location of the BatchDriftGenerator class is temporary and it will be moved in next releases)
 
             percentiles: np.array or list with percentiles to calculate in model outputs to be used as features in the regressor.
                 By default, the calculated percentiles are [0, 5, 10, ..., 95, 100]
