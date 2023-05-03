@@ -5,6 +5,10 @@
 
 ***mercury-monitoring*** is a library to monitor data and model drift. 
 
+***mercury-monitoring*** has an array of classes which can be used to monitor model-drifting. You can detect the drifting in the models with the Kolmogorov-Smirnov statistic or the Chi2Drift for example,
+among a few others you can check it out in the code to use the ones which add more value to you. All of the drifting-detection methods implements the `calculate_drift()` which is used to obtain a dict of metrics.
+
+
 ## Mercury project at BBVA
 
 Mercury is a collaborative library that was developed by the Advanced Analytics community at BBVA. Originally, it was created as an [InnerSource](https://en.wikipedia.org/wiki/Inner_source) project but after some time, we decided to release certain parts of the project as Open Source.
