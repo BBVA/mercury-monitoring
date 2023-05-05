@@ -3,10 +3,8 @@
 [![](https://github.com/BBVA/mercury-monitoring/actions/workflows/test.yml/badge.svg)](https://github.com/BBVA/mercury-monitoring)
 ![](https://img.shields.io/badge/latest-0.0.1-blue)
 
-***mercury-monitoring*** is a library to monitor data and model drift. 
-
-***mercury-monitoring*** has an array of classes which can be used to monitor model-drifting. You can detect the drifting in the models with the Kolmogorov-Smirnov statistic or the Chi2Drift for example,
-among a few others you can check it out in the code to use the ones which add more value to you. All of the drifting-detection methods implements the `calculate_drift()` which is used to obtain a dict of metrics.
+***mercury-monitoring*** is a library to monitor data and model drift and has an array of classes which can be used to monitor model-drift. You can detect the drift in the models with the Kolmogorov-Smirnov statistic or the Chi2Drift for example,
+among a few others you can check it out in the code to use the ones which add more value to you. All of the drift-detection methods implements the `calculate_drift()` which is used to obtain a dict of metrics.
 
 
 ## Mercury project at BBVA
