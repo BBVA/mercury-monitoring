@@ -101,7 +101,18 @@ class BaseBatchDriftDetector(ABC):
 
         return idx_feature
 
-    def plot_distribution_feature(self, idx_feature=None, name_feature=None, ax=None, figsize=(8, 4)):
+    def plot_distribution_feature(
+        self,
+        idx_feature=None,
+        name_feature=None,
+        ax=None,
+        figsize=(8, 4),
+        kde=True,
+        stat='density',
+        common_bins=True,
+        common_norm=False,
+        **kwargs
+    ):
         """
         Plots the distribution of a given feature for the source and the target datasets.
         The feature can be indicated by the index using the `idx_feature` parameter, or by the name using the
@@ -115,6 +126,18 @@ class BaseBatchDriftDetector(ABC):
                 Axes object on which the data will be plotted. If not specified it creates one.
             figsize (tuple):
                 figsize to use if `ax` is not specified.
+            kde (bool):
+                whether to show the smoothed distribution. Default is True
+            stat (str):
+                Aggregate statistic to compute in each bin. By default is 'density'. Valid values can be checked in
+                seaborn documentation
+            common_bins (bool):
+                If True, use the same bins for the target and source dataset. By default is True
+            common_norm (bool):
+                If True and using a normalized statistic, the normalization will apply over the full dataset (src and target).
+                Otherwise, the normalization is applied to each set independently. Default is False.
+            kwargs:
+                Extra key arguments that can be passed to seaborn `histplot`.
         Returns:
             The axes
         """
@@ -123,10 +146,19 @@ class BaseBatchDriftDetector(ABC):
         if ax is None:
             fig, ax = plt.subplots(1, 1, figsize=figsize)
 
-        palette = itertools.cycle(sns.color_palette())
-        axes = sns.histplot(self.X_src[:, idx_feature], kde=True, color=next(palette), ax=ax, label="dataset source")
-        axes = sns.histplot(self.X_target[:, idx_feature], kde=True, color=next(palette), ax=ax, label="dataset target")
-        axes.legend()
+        data_plot = np.concatenate((self.X_src[:, idx_feature], self.X_target[:, idx_feature]))
+        n_samples_src = len(self.X_src[:, idx_feature])
+        n_samples_target = len(self.X_target[:, idx_feature])
+        axes = sns.histplot(
+            x=data_plot,
+            hue=["dataset source"] * n_samples_src + ["dataset target"] * n_samples_target,
+            kde=kde,
+            stat=stat,
+            common_bins=common_bins,
+            common_norm=common_norm,
+            **kwargs
+        )
+
         return axes
 
     def plot_histograms_feature(self, idx_feature=None, name_feature=None, figsize=(8, 4)):
@@ -156,7 +188,15 @@ class BaseBatchDriftDetector(ABC):
         axes[1].set_title("histogram target")
         return axes
 
-    def plot_distribution_drifted_features(self, figsize=(8, 4)):
+    def plot_distribution_drifted_features(
+        self,
+        figsize=(8, 4),
+        kde=True,
+        stat='density',
+        common_bins=True,
+        common_norm=False,
+        **kwargs
+    ):
         """
         Plots the distributions of the features that are considered to have drift. The method `calculate_drift`
         needs to be called first.
@@ -164,12 +204,26 @@ class BaseBatchDriftDetector(ABC):
         Args:
             figsize (tuple):
                 figsize to use if `ax` is not specified.
+            kde (bool):
+                whether to show the smoothed distribution. Default is True
+            stat (str):
+                Aggregate statistic to compute in each bin. By default is 'density'. Valid values can be checked in
+                seaborn documentation
+            common_bins (bool):
+                If True, use the same bins for the target and source dataset. By default is True
+            common_norm (bool):
+                If True and using a normalized statistic, the normalization will apply over the full dataset (src and target).
+                Otherwise, the normalization is applied to each set independently. Default is False.
+            kwargs:
+                Extra key arguments that can be passed to seaborn `histplot`.
 
         """
 
         drifted_features = self.get_drifted_features(return_as_indices=True)
         for idx in drifted_features:
-            ax = self.plot_distribution_feature(idx_feature=idx, figsize=figsize)
+            ax = self.plot_distribution_feature(
+                idx_feature=idx, figsize=figsize, kde=kde, common_bins=common_bins, common_norm=common_norm, stat=stat, **kwargs
+            )
             if self.features:
                 ax.set_title(self.features[idx])
             else:
