@@ -65,7 +65,7 @@ The easiest way to install `mercury-monitoring` is using ``pip``:
 
 ## Help and support 
 
-This library is currently maintained by a dedicated team of data scientists and machine learning engineers from BBVA AI Factory.  In case you find any bug, have an idea or request feel free to open a ticket on the [Issues](https://github.com/BBVA/mercury-monitoring/issues) section.
+This library is currently maintained by a dedicated team of data scientists and machine learning engineers from BBVA.  In case you find any bug, have an idea or request feel free to open a ticket on the [Issues](https://github.com/BBVA/mercury-monitoring/issues) section.
 
 ### Email 
 mercury.group@bbva.com
