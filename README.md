@@ -2,6 +2,14 @@
 
 [![](https://github.com/BBVA/mercury-monitoring/actions/workflows/test.yml/badge.svg)](https://github.com/BBVA/mercury-monitoring)
 ![](https://img.shields.io/badge/latest-1.1.3-blue)
+[![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-3816/)
+[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-3916/)
+[![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-31011/)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3119/)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3128/)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/release/python-3131/)
+[![Apache 2 license](https://shields.io/badge/license-Apache%202-blue)](http://www.apache.org/licenses/LICENSE-2.0)
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/BBVA/mercury-monitoring/issues)
 
 ***mercury-monitoring*** is a library to monitor data and model drift. It contains a set of utilities which you can use for detecting in advance whether the statistical properties of your data have changed and whether your model's performance is getting worse.
 
