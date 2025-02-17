@@ -42,7 +42,7 @@ class DomainClassifierDrift(BaseBatchDriftDetector):
             distinguishes samples from the source dataset and target dataset. Increasing the value will be more
             conservative when detecting drift, so it will lower the false positive detection rate. However, higher
             values also can miss true drift detection. Default value is 0.025 which in general a good trade-off.
-        **kwargs:
+        **kwargs (dict):
             The rest of the parameters will be used in the Random forest trained as domain classifier. If not specified,
             then the default parameters will be used.
 
@@ -155,8 +155,8 @@ class DomainClassifierDrift(BaseBatchDriftDetector):
             return_drift_score_target (boolean):
                 Indicates if additionally return a dataframe with a drift score for each sample in the target dataset
 
-        Returns:
-            (dict): Dictionary with the drift metrics. If parameter `return_drift_score_target` is set to True, then it also
+        Returns (dict):
+            Dictionary with the drift metrics. If parameter `return_drift_score_target` is set to True, then it also
             returns a dataframe with the drift scores for the target dataset.
         """
 

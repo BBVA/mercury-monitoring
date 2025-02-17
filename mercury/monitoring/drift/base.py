@@ -214,7 +214,7 @@ class BaseBatchDriftDetector(ABC):
             common_norm (bool):
                 If True and using a normalized statistic, the normalization will apply over the full dataset (src and target).
                 Otherwise, the normalization is applied to each set independently. Default is False.
-            kwargs:
+            kwargs (dict):
                 Extra key arguments that can be passed to seaborn `histplot`.
 
         """

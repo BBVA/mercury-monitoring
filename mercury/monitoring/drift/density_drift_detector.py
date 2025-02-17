@@ -56,7 +56,7 @@ class DensityDriftDetector:
             epochs: Number of epochs to train the model. If None, early stopping will be used.
             batch_size: batch_size
 
-        Returns:
+        Returns (DensityDriftDetector):
             self, detector trained
         """
         import tensorflow as tf
@@ -141,7 +141,7 @@ class DensityDriftDetector:
         Gets the embeddings predicted by the VAE's encoder.
 
         Args:
-            target: dataset
+            target (np.ndarray or pd.DataFrame): dataset
 
         Returns:
             numpy array with embeddings
