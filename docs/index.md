@@ -23,7 +23,7 @@ The easiest way to install `mercury-monitoring` is using ``pip``:
 This library is currently maintained by a dedicated team of data scientists and machine learning engineers from BBVA AI Factory.
 
 ### Documentation
-website: https://bbva.github.io/mercury-monitoring/
+website: https://bbva.github.io/mercury-monitoring/site/
 
 ### Email
 mercury.group@bbva.com

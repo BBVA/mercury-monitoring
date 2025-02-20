@@ -56,7 +56,7 @@ drift_detector.plot_feature_drift_scores(figsize=(8,4))
 Feel free to explore more of the drift detectors and use the most appropiate for your use case.
 
 ### Documentation
-We encourage you checking the documentation of this package at: https://bbva.github.io/mercury-monitoring/ and taking a look at the available [notebook tutorials](https://github.com/BBVA/mercury-monitoring/tree/readme/tutorials).
+We encourage you checking the documentation of this package at: https://bbva.github.io/mercury-monitoring/site/ and taking a look at the available [notebook tutorials](https://github.com/BBVA/mercury-monitoring/tree/readme/tutorials).
 
 ## Mercury project at BBVA
 
