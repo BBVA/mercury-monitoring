@@ -124,7 +124,7 @@ class DomainClassifierDrift(BaseBatchDriftDetector):
         l_auc = [m['auc'] for m in metrics]
         n_greater = [auc > (0.5 + self.alpha) for auc in l_auc]
         n_success = np.sum(n_greater)
-        p_val = binomtest(n_success, n=len(l_auc), p=0.5, alternative='greater')
+        p_val = binomtest(n_success, n=len(l_auc), p=0.5, alternative='greater').pvalue
         agg_metrics['p_val'] = p_val
         agg_metrics['score'] = np.mean(l_auc)
 
