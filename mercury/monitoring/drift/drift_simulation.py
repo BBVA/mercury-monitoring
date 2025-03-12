@@ -31,10 +31,6 @@ class BatchDriftGenerator():
 
     Args:
         X: Dataset features
-        names_categorical: An optional list with the names of the categorical variables. If given,
-        even as an empty list, only the column names in the list will be treated as categorical.
-        Otherwise, it will try to autodetect.
-
     """
     def __init__(
             self, X: Union[pd.DataFrame, np.ndarray],
@@ -83,8 +79,8 @@ class BatchDriftGenerator():
 
         Args:
             cols: List of columns names where the operation will be performed
-            force: Amount shift each column will receive
-            noise: Amount of standard deviation the shift of each column will receive.
+            force (float): Amount shift each column will receive
+            noise (float): Amount of standard deviation the shift of each column will receive.
 
         Returns:
             An updated version of the simulator.
@@ -108,9 +104,9 @@ class BatchDriftGenerator():
 
         Args:
             cols: List of columns names where the operation will be performed
-            mean: The mean value of the random scale (if iqr is not given). Default is 1.
-            sd: The standard deviation of the random scale (if iqr is not given). Default is 0.05.
-            iqr: An alternative way to define the random scale is by giving the interquartile range as
+            mean (float): The mean value of the random scale (if iqr is not given). Default is 1.
+            sd (float): The standard deviation of the random scale (if iqr is not given). Default is 0.05.
+            iqr (list): An alternative way to define the random scale is by giving the interquartile range as
                 a list of 2 elements. E.g. [1, 1.2]
 
         Returns:
@@ -184,8 +180,8 @@ class BatchDriftGenerator():
         be specified using `method_params`.
 
         Args:
-              cols: List of columns names to generate outliers.
-              method: string of the method to generate to use or custom function to generate outliers. If
+            cols: List of columns names to generate outliers.
+            method: string of the method to generate to use or custom function to generate outliers. If
                 using string, the current available method are 'percentile' and 'value'. If using 'percentile'
                 values in the dataframe are replaced by a percentile of that column. The percentile to use is
                 specified in key 'percentile' in `method_params` dictionary, and the key 'proportion_outliers'
@@ -196,7 +192,7 @@ class BatchDriftGenerator():
                 `fn(X: np.array, params: dict = None)`, where `X` will be an array of shape==1 to apply
                 the outlier generation and `params` is the dictionary where parameters of the method
                 are passed.
-              method_params: dictionary containing the parameters to use in `method`
+            method_params: dictionary containing the parameters to use in `method`
 
         Returns:
             An updated version of the simulator.

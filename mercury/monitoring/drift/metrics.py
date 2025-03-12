@@ -43,7 +43,7 @@ def bootstrap_eval_drift(
         resample_size_src (int): size of each resample for the source dataset. If None, length of the source.
         resample_size_target (int): size of each resample for the target dataset. If None, length of the target.
         num_resamples (int): number of resamples
-        drift_detector: drift detector to use. If None it will create a KSDrift object
+        drift_detector (KSDrift): drift detector to use. If None it will create a KSDrift object
 
     Returns:
             drift_metrics (dict): dictionary with the obtained drift metrics
@@ -109,8 +109,8 @@ def hellinger_distance(p, q, normalize=True):
         normalize (bool): Whether to normalize the histograms. If True the proportions of each bin are calculated first
             and then the distance is calculated with the proportions
 
-        Returns:
-            (float): float representing the Hellinger distance
+    Returns (float):
+            Hellinger distance
 
     """
 
@@ -140,8 +140,8 @@ def jeffreys_divergence(p, q, normalize=True):
         normalize (bool): Whether to normalize the histograms. If True the proportions of each bin are calculated first
             and then the distance is calculated with the proportions
 
-        Returns:
-            (float): float representing the hellinger distance
+    Returns (float):
+        Jeffreys divergence
 
     """
 

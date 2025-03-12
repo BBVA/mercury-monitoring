@@ -56,7 +56,7 @@ class DensityDriftDetector:
             epochs: Number of epochs to train the model. If None, early stopping will be used.
             batch_size: batch_size
 
-        Returns:
+        Returns (DensityDriftDetector):
             self, detector trained
         """
         import tensorflow as tf
@@ -141,7 +141,7 @@ class DensityDriftDetector:
         Gets the embeddings predicted by the VAE's encoder.
 
         Args:
-            target: dataset
+            target (np.ndarray or pd.DataFrame): dataset
 
         Returns:
             numpy array with embeddings
@@ -180,7 +180,7 @@ class DensityDriftDetector:
         from ._vae import VAE, Sampling  # Avoid importing TF
         import tensorflow as tf
 
-        encoder_inputs = tf.keras.Input(shape=(input_shape))
+        encoder_inputs = tf.keras.Input(shape=(input_shape,))
         x = tf.keras.layers.Dense(32, activation="relu")(encoder_inputs)
         x = tf.keras.layers.Dense(16, activation="relu")(x)
         x = tf.keras.layers.Dense(8, activation="relu")(x)
