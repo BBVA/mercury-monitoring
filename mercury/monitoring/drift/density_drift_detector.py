@@ -180,7 +180,7 @@ class DensityDriftDetector:
         from ._vae import VAE, Sampling  # Avoid importing TF
         import tensorflow as tf
 
-        encoder_inputs = tf.keras.Input(shape=(input_shape))
+        encoder_inputs = tf.keras.Input(shape=(input_shape,))
         x = tf.keras.layers.Dense(32, activation="relu")(encoder_inputs)
         x = tf.keras.layers.Dense(16, activation="relu")(x)
         x = tf.keras.layers.Dense(8, activation="relu")(x)
