@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from scipy.stats import binom_test
+from scipy.stats import binomtest
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import roc_auc_score
@@ -124,7 +124,7 @@ class DomainClassifierDrift(BaseBatchDriftDetector):
         l_auc = [m['auc'] for m in metrics]
         n_greater = [auc > (0.5 + self.alpha) for auc in l_auc]
         n_success = np.sum(n_greater)
-        p_val = binom_test(n_success, n=len(l_auc), p=0.5, alternative='greater')
+        p_val = binomtest(n_success, n=len(l_auc), p=0.5, alternative='greater')
         agg_metrics['p_val'] = p_val
         agg_metrics['score'] = np.mean(l_auc)
 
