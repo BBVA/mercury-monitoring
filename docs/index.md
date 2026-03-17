@@ -1,7 +1,7 @@
 # mercury-monitoring
 
 [![](https://github.com/BBVA/mercury-monitoring/actions/workflows/test.yml/badge.svg)](https://github.com/BBVA/mercury-monitoring)
-![](https://img.shields.io/badge/latest-1.1.3-blue)
+![](https://img.shields.io/badge/latest-1.2.1-blue)
 
 ***mercury-monitoring*** is a library to monitor data and model drift.
 
