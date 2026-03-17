@@ -1,6 +1,6 @@
 import os, shutil
 
-from mercury.dataschema.create_tutorials import create_tutorials
+from mercury.monitoring.create_tutorials import create_tutorials
 
 
 def test_create_tutorials():
