@@ -23,10 +23,10 @@ def create_tutorials(destination, silent = False):
     src = '%s/tutorials' % str(files(__package__))
 
     # When the packages is not installed and runs from source code, the path is:
-    # `<..>/notebooks` instead of `<..>/mercury/monitoring/tutorials`
+    # `<..>/tutorials` instead of `<..>/mercury/monitoring/tutorials`
 
     if not os.path.exists(src):
-        src = src.replace('/mercury/monitoring/tutorials', '/notebooks')
+        src = src.replace('/mercury/monitoring/tutorials', '/tutorials')
 
     dst = os.path.abspath(destination)
 
