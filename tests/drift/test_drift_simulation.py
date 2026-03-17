@@ -124,6 +124,7 @@ def test_rotation_drift(datasets):
             pytest.approx(np.linalg.norm(sim.data.loc[:, ['age', 'fare']].dropna()))
     )
 
+
 def test_generate_outliers_drift_percentile_method(datasets):
     tips, titanic = datasets
 
@@ -160,6 +161,7 @@ def test_generate_outliers_drift_set_value_method(datasets):
     assert prop_outliers == pytest.approx(0.95, 0.02)
     assert sim.data["age"].mean() > titanic["age"].mean()
 
+
 def test_generate_outliers_drift_custom_fn(datasets):
     tips, titanic = datasets
 
@@ -184,6 +186,7 @@ def test_generate_outliers_drift_custom_fn(datasets):
     assert prop_outliers == pytest.approx(0.90, 0.02)
     assert sim.data["age"].mean() > titanic["age"].mean()
 
+
 def test_generate_outliers_discrete_column(datasets):
     tips, titanic = datasets
     titanic["fare"] = titanic["fare"].astype(int)
@@ -197,6 +200,7 @@ def test_generate_outliers_discrete_column(datasets):
     prop_outliers = (sim.data["fare"] <= perc_99).sum() / len(sim.data)
     assert prop_outliers == pytest.approx(1, 0.02)
     assert sim.data["fare"].mean() > titanic["fare"].mean()
+
 
 def test_generate_outliers_invalid_inputs(datasets):
     tips, titanic = datasets
@@ -214,3 +218,17 @@ def test_generate_outliers_invalid_inputs(datasets):
         sim = BatchDriftGenerator(titanic.copy()).outliers_drift(
             cols=["fare"], method="wrong_method", method_params=method_params
         )
+
+
+if __name__ == "__main__":
+    test_constructor()
+    test_na_drift()
+    test_shift_drift()
+    test_scale_drift()
+    test_recodification_drift()
+    test_rotation_drift()
+    test_generate_outliers_drift_percentile_method()
+    test_generate_outliers_drift_set_value_method()
+    test_generate_outliers_drift_custom_fn()
+    test_generate_outliers_discrete_column()
+    test_generate_outliers_invalid_inputs()

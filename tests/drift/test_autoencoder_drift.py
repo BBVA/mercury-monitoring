@@ -42,6 +42,7 @@ def test_ae_detector():
     assert 'source_errors' in result
     assert 'target_errors' in result
 
+
 def test_ae_detector_custom_reconstruction_error():
     # Test the detector passing a lambda as reconstruction error
 
@@ -57,8 +58,6 @@ def test_ae_detector_custom_reconstruction_error():
     assert result['drift'] == True
 
 
-
-
 def test_ae_detect_exceptions():
     with pytest.raises(ValueError):
         AutoEncoderDriftDetector(fitted_models=[1,2,3])
@@ -68,3 +67,9 @@ def test_ae_detect_exceptions():
 
     with pytest.raises(ValueError):
         AutoEncoderDriftDetector(autoencoder_kwargs='test')
+
+
+if __name__ == "__main__":
+    test_ae_detector()
+    test_ae_detector_custom_reconstruction_error()
+    test_ae_detect_exceptions()

@@ -31,3 +31,8 @@ def test_explanations():
     # custom ref point
     deltas = detector.explain(X_target_drifted, ref_point=np.array([10, 10]))
     assert deltas.shape == X_target_drifted.shape
+
+
+if __name__ == "__main__":
+    test_density_detector()
+    test_explanations()

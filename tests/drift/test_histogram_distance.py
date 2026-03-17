@@ -103,6 +103,7 @@ def test_histogram_distance_drift_exceptions():
         )
         hist_dist_drift.calculate_drift()
 
+
 def test_histogram_with_empty_bins():
     histograms_src = [np.array([5, 1, 0]), np.array([0, 6, 0])]
     histograms_target_1 = [np.array([2, 0, 1]), np.array([1, 0, 3])]
@@ -113,3 +114,9 @@ def test_histogram_with_empty_bins():
     )
     drift_metrics_1 = hist_dist_drift_1.calculate_drift()
     assert len(drift_metrics_1["p_vals"]) == 2
+
+
+if __name__ == "__main__":
+    test_histogram_distance_drift()
+    test_histogram_distance_drift_exceptions()
+    test_histogram_with_empty_bins()

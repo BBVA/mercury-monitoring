@@ -71,3 +71,7 @@ def test_chi2_drift_exceptions():
         )
         chi_drift.calculate_drift()
 
+
+if __name__ == "__main__":
+    test_chi2_drift()
+    test_chi2_drift_exceptions()

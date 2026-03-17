@@ -4,6 +4,7 @@ from mercury.monitoring.drift.domain_classifier_drift_detector import DomainClas
 import numpy as np
 import pytest
 
+
 def test_bootstrap_eval_drift():
 
     def eval_acc(y_true, y_pred):
@@ -59,3 +60,7 @@ def test_bootstrap_eval_drift():
     assert drift_metrics["drift_detected"] == True
     assert np.mean(dist_src) == pytest.approx(0.8, 0.1)
     assert np.mean(dist_target) == pytest.approx(0.2, 0.1)
+
+
+if __name__ == "__main__":
+    test_bootstrap_eval_drift()
