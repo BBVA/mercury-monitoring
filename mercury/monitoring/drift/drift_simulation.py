@@ -47,11 +47,11 @@ class BatchDriftGenerator():
     def schema(self):
         if self._schema is None:
             warnings.warn(
-                """You haven't specified a schema in the constructor neither `cols`. Autoinferring an schema... """
-                """If you wish to suppress this warning provide a schema to the construct or specify the `cols` parameter.""",
+                """You haven't specified a schema in the constructor or `cols`. Auto-inferring a schema... """
+                """If you wish to suppress this warning, provide a schema to the constructor or specify the `cols` parameter.""",
                 RuntimeWarning
             )
-            self._schema = DataSchema().generate(self.X, verbose=True)
+            self._schema = DataSchema().generate(self.X, verbose=False)
         return self._schema
 
     def hyperplane_rotation_drift(self, cols: List[str] = None, force: float = 10.0) -> "BatchDriftGenerator":

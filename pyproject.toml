@@ -50,3 +50,9 @@ exclude = ["docs*", "tests*", "tutorials"]
 [project.urls]
 "Homepage" = "https://github.com/BBVA/mercury-monitoring"
 "Bug Tracker" = "https://github.com/BBVA/mercury-monitoring/issues"
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+  "ignore:__array__ implementation doesn't accept a copy keyword.*:DeprecationWarning:keras\\.src\\.backend\\.tensorflow\\.core",
+]
