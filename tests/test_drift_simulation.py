@@ -178,6 +178,7 @@ def test_generate_outliers_drift_custom_fn(datasets):
 
         outlier_val = X[~np.isnan(X)].max() * _params["multiplier"]
         indices = np.random.choice(range(len(X)), size=int(len(X) * _params["proportion_outliers"]), replace=False)
+        X = np.array(X, copy = True)
         X[indices] = outlier_val
         return X
 

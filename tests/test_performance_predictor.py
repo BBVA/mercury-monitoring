@@ -32,7 +32,7 @@ def test_performance_predictor_binary_classification():
     p = 0.5
     amount = 10.5
     noise = 0.05
-    feature_values = X_serving_2[feature].values
+    feature_values = np.array(X_serving_2[feature].values, copy=True)
     idx_corrupt = np.random.choice(range(len(feature_values)), size=int(len(feature_values) * p), replace=False)
     shift_values = np.random.normal(loc=amount, scale=noise, size=len(idx_corrupt))
     feature_values[idx_corrupt] += shift_values
@@ -109,7 +109,7 @@ def test_performance_predictor_regression():
     p = 0.75
     amount = 100.5
     noise = 0.05
-    feature_values = X_serving_2[feature].values
+    feature_values = np.array(X_serving_2[feature].values, copy=True)
     idx_corrupt = np.random.choice(range(len(feature_values)), size=int(len(feature_values) * p), replace=False)
     shift_values = np.random.normal(loc=amount, scale=noise, size=len(idx_corrupt))
     feature_values[idx_corrupt] += shift_values
@@ -159,7 +159,7 @@ def test_performance_predictor_multiclass_classification():
     p = 0.5
     amount = 10.5
     noise = 0.05
-    feature_values = X_serving_2[feature].values
+    feature_values = np.array(X_serving_2[feature].values, copy=True)
     idx_corrupt = np.random.choice(range(len(feature_values)), size=int(len(feature_values) * p), replace=False)
     shift_values = np.random.normal(loc=amount, scale=noise, size=len(idx_corrupt))
     feature_values[idx_corrupt] += shift_values

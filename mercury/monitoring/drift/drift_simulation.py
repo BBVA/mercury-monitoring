@@ -252,14 +252,15 @@ class BatchDriftGenerator():
 
 def _replace_values_randomly(X: np.array, value: Union[float, int], percentage: float):
     indices = np.random.choice(range(len(X)), size=int(len(X) * percentage), replace=False)
+    X = np.array(X, copy = True)
     X[indices] = value
     return X
 
 
 def _generate_outliers_percentile(X: np.array, params: dict = None):
 
-    if not np.issubdtype(X.dtype, np.number):
-        raise ValueError("generating outliers by perecentile only works with numeric arrays")
+    if not pd.api.types.is_numeric_dtype(X):
+        raise ValueError("generating outliers by percentile only works with numeric arrays")
 
     _params = dict(
         percentile=99,
