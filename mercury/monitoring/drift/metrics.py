@@ -201,5 +201,6 @@ def psi(p, q, normalize=True, eps=1e-4):
     p[p == 0] = eps
     q[q == 0] = eps
 
-    psi = (p - q) * np.log(p / q)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        psi = (p - q) * np.log(p / q)
     return np.sum(psi)

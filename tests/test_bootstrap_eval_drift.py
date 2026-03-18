@@ -1,8 +1,10 @@
 
 from mercury.monitoring.drift.metrics import bootstrap_eval_drift
 from mercury.monitoring.drift.domain_classifier_drift_detector import DomainClassifierDrift
+from mercury.monitoring.drift._resampling import bootstrap_eval
 import numpy as np
 import pytest
+
 
 def test_bootstrap_eval_drift():
 
@@ -59,3 +61,22 @@ def test_bootstrap_eval_drift():
     assert drift_metrics["drift_detected"] == True
     assert np.mean(dist_src) == pytest.approx(0.8, 0.1)
     assert np.mean(dist_target) == pytest.approx(0.2, 0.1)
+
+
+def test_bootstrap_eval_helper_branches():
+    def eval_acc(y_true, y_pred):
+        return np.sum(y_true == y_pred) / y_true.shape[0]
+
+    y_true = np.array([0, 1, 0, 1])
+    y_pred = np.array([0, 1, 1, 1])
+
+    output = bootstrap_eval(y_true, y_pred, eval_fn=eval_acc, num_resamples=5, resample_size=None)
+    assert output.shape == (5,)
+
+    with pytest.raises(ValueError):
+        bootstrap_eval(y_true, y_pred[:-1], eval_fn=eval_acc, num_resamples=5)
+
+
+if __name__ == "__main__":
+    test_bootstrap_eval_drift()
+    test_bootstrap_eval_helper_branches()

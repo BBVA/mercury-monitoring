@@ -32,15 +32,18 @@ def test_jeffrey_min_distance():
     q = np.array([10,10,10])
     assert jeffreys_divergence(p,q) == 0
 
+
 def test_jeffrey_normalize_false():
     p = np.array([0.33,0.33,0.33])
     q = np.array([0.33,0.33,0.33])
     assert jeffreys_divergence(p,q, normalize=False) == 0
 
+
 def test_jeffrey_special_case_zeros():
     p = np.array([0,1,0])
     q = np.array([1,0,1])
     assert jeffreys_divergence(p,q) > 0
+
 
 def test_jeffreys_exceptions():
 
@@ -49,3 +52,12 @@ def test_jeffreys_exceptions():
     q = np.array([0.5, 0.5])
     with pytest.raises(Exception):
         jeffreys_divergence(p, q)
+
+
+if __name__ == "__main__":
+    test_jeffrey()
+    test_jeffrey_symmetry()
+    test_jeffrey_min_distance()
+    test_jeffrey_normalize_false()
+    test_jeffrey_special_case_zeros()
+    test_jeffreys_exceptions()

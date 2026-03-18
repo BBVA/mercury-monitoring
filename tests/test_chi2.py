@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from mercury.monitoring.drift.chi2_drift_detector import Chi2Drift
+from mercury.monitoring.drift.base import BaseBatchDriftDetector
 
 
 def test_chi2_drift():
@@ -71,3 +72,38 @@ def test_chi2_drift_exceptions():
         )
         chi_drift.calculate_drift()
 
+
+def test_base_detector_extra_branches():
+    class DummyDetector(BaseBatchDriftDetector):
+        def calculate_drift(self):
+            return super().calculate_drift()
+
+    detector = DummyDetector(
+        X_src=np.array([[0.0, 1.0], [1.0, 2.0]]),
+        X_target=np.array([[0.1, 0.9], [0.9, 2.1]]),
+        distr_src=[np.array([5, 5]), np.array([3, 7])],
+        distr_target=[np.array([4, 6]), np.array([2, 8])],
+    )
+
+    with pytest.raises(NotImplementedError):
+        detector.calculate_drift()
+
+    with pytest.raises(ValueError):
+        detector._get_index_feature(name_feature="f0")
+
+    detector.features = ["f0", "f1"]
+    assert detector._get_index_feature(name_feature="f1") == 1
+
+    detector.drift_metrics = {"p_vals": np.array([0.1]), "threshold": 0.05}
+    with pytest.raises(KeyError):
+        detector.get_drifted_features(return_as_indices=True)
+
+    detector.drift_metrics = {"score": 0.1}
+    with pytest.raises(ValueError):
+        detector.plot_feature_drift_scores()
+
+
+if __name__ == "__main__":
+    test_chi2_drift()
+    test_chi2_drift_exceptions()
+    test_base_detector_extra_branches()
