@@ -68,8 +68,26 @@ def test_ae_detect_exceptions():
     with pytest.raises(ValueError):
         AutoEncoderDriftDetector(autoencoder_kwargs='test')
 
+    with pytest.raises(RuntimeError):
+        AutoEncoderDriftDetector().calculate_drift(np.zeros((10, 2)))
+
+
+def test_ae_detector_reload():
+    fitted_models = [object(), object()]
+    reference_errors = [0.1, 0.2]
+
+    detector = AutoEncoderDriftDetector(fitted_models=fitted_models, reference_errors=reference_errors)
+
+    assert detector.is_fitted is True
+    assert detector.fitted_models == fitted_models
+    assert detector.reference_distribution == reference_errors
+
+    with pytest.raises(ValueError):
+        AutoEncoderDriftDetector(reference_errors=reference_errors)
+
 
 if __name__ == "__main__":
     test_ae_detector()
     test_ae_detector_custom_reconstruction_error()
     test_ae_detect_exceptions()
+    test_ae_detector_reload()

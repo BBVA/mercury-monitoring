@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from mercury.monitoring.drift.density_drift_detector import DensityDriftDetector
 
@@ -33,6 +34,17 @@ def test_explanations():
     assert deltas.shape == X_target_drifted.shape
 
 
+def test_density_detector_error_paths():
+    with pytest.raises(ValueError):
+        DensityDriftDetector(encoder=object())
+
+    detector = DensityDriftDetector()
+    detector.surrogate = None
+    with pytest.raises(RuntimeError):
+        detector._fit_surrogate()
+
+
 if __name__ == "__main__":
     test_density_detector()
     test_explanations()
+    test_density_detector_error_paths()

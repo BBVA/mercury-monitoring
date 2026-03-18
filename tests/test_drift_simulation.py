@@ -49,6 +49,9 @@ def test_na_drift(datasets):
 
     assert (sim.data.alive.isna().sum() / len(sim.data)) == pytest.approx(0.5, 0.2)
 
+    with pytest.raises(ValueError):
+        BatchDriftGenerator(titanic.copy()).missing_val_drift(cols=['alive', 'deck'], percent=[0.1])
+
 
 def test_shift_drift(datasets):
     tips, titanic = datasets
@@ -202,6 +205,16 @@ def test_generate_outliers_discrete_column(datasets):
     assert sim.data["fare"].mean() > titanic["fare"].mean()
 
 
+def test_generate_outliers_default_columns(datasets):
+    tips, titanic = datasets
+
+    method_params = {"value": 999.0, "proportion_outliers": 0.1}
+    sim = BatchDriftGenerator(titanic.copy()).outliers_drift(method="value", method_params=method_params)
+
+    assert (sim.data["age"] == 999.0).sum() > 0
+    assert (sim.data["fare"] == 999.0).sum() > 0
+
+
 def test_generate_outliers_invalid_inputs(datasets):
     tips, titanic = datasets
 
@@ -231,4 +244,5 @@ if __name__ == "__main__":
     test_generate_outliers_drift_set_value_method()
     test_generate_outliers_drift_custom_fn()
     test_generate_outliers_discrete_column()
+    test_generate_outliers_default_columns()
     test_generate_outliers_invalid_inputs()

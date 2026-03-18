@@ -116,7 +116,28 @@ def test_histogram_with_empty_bins():
     assert len(drift_metrics_1["p_vals"]) == 2
 
 
+def test_histogram_permutation_with_replacement():
+    detector = HistogramDistanceDrift(
+        distr_src=[np.array([5, 5, 5])],
+        distr_target=[np.array([4, 4, 7])],
+        p_val=0.05,
+        n_permutations=5,
+    )
+
+    p_val = detector._permutation_test_from_histograms(
+        np.array([5, 5, 5]),
+        np.array([4, 4, 7]),
+        n_permutations=5,
+        func_statistic=lambda a, b: np.abs(a - b).sum(),
+        obs_statistic=1.0,
+        sample_with_replacement=True,
+    )
+
+    assert 0 <= p_val <= 1
+
+
 if __name__ == "__main__":
     test_histogram_distance_drift()
     test_histogram_distance_drift_exceptions()
     test_histogram_with_empty_bins()
+    test_histogram_permutation_with_replacement()

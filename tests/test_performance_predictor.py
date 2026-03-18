@@ -185,7 +185,39 @@ def test_performance_predictor_multiclass_classification():
     assert (predicted_acc_2 < predicted_acc_1) and (real_acc_2 < real_acc_1)
 
 
+def test_performance_predictor_generate_schema_with_categorical_names():
+    X = pd.DataFrame({
+        "f0": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+        "f1": ["a", "b", "a", "b", "a", "b"],
+    })
+    y = np.array([0, 1, 0, 1, 0, 1])
+
+    model = RandomForestClassifier(n_estimators=5, random_state=42).fit(pd.get_dummies(X), y)
+
+    class WrappedClassifier:
+        def __init__(self, fitted_model):
+            self.fitted_model = fitted_model
+
+        def predict(self, frame):
+            return self.fitted_model.predict(pd.get_dummies(frame))
+
+        def predict_proba(self, frame):
+            return self.fitted_model.predict_proba(pd.get_dummies(frame))
+
+    performance_predictor = PerformancePredictor(
+        WrappedClassifier(model),
+        metric_fn=accuracy_score,
+        corruptions=[('shift_drift', {'cols': ['f0'], 'force': 0.1, 'noise': 0.0})] * 6,
+        K_cv=3,
+    )
+
+    performance_predictor.fit(X=X, y=y, names_categorical=["f1"])
+
+    assert "f1" in performance_predictor.dataset_schema.categorical_feats
+
+
 if __name__ == "__main__":
     test_performance_predictor_regression()
     test_performance_predictor_multiclass_classification()
     test_performance_predictor_binary_classification()
+    test_performance_predictor_generate_schema_with_categorical_names()
