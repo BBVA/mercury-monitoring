@@ -55,4 +55,6 @@ exclude = ["docs*", "tests*", "tutorials"]
 asyncio_default_fixture_loop_scope = "function"
 filterwarnings = [
   "ignore:__array__ implementation doesn't accept a copy keyword.*:DeprecationWarning:keras\\.src\\.backend\\.tensorflow\\.core",
+  "ignore:You haven't specified a schema in the constructor or `cols`\\..*:RuntimeWarning",
+  "ignore:Very few corruptions have been specified or created from data drift\\..*:UserWarning",
 ]
