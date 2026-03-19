@@ -61,3 +61,8 @@ def test_domain_classifier_exceptions():
         domain_class_drift = DomainClassifierDrift(X_src=np.zeros((5, 2)), X_target=np.zeros((5, 3)),
                                                    features=["f1", "f2"], p_val=0.01, correction="bonferroni")
         drift_metrics = domain_class_drift.calculate_drift()
+
+
+if __name__ == "__main__":
+    test_domain_classifier()
+    test_domain_classifier_exceptions()

@@ -113,3 +113,8 @@ def test_ks_exceptions():
     with pytest.raises(Exception):
         ks_drift = KSDrift(X_src=np.zeros((3, 3)), X_target=np.zeros((3, 3)), features=["f1", "f2"])
         ks_drift._get_index_feature(idx_feature=3, name_feature="f1")
+
+
+if __name__ == "__main__":
+    test_ks()
+    test_ks_exceptions()

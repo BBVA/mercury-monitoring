@@ -120,8 +120,9 @@ class PerformancePredictor:
         # if we have very few corruptions (less than param K_cv), raise a warning a create scale drift
         if len(self.corruptions) <= self.K_cv:
             warnings.warn(
-                "Very corruptions have been specified or created from data drift. "
-                "scale dirft will be added for all features individually")
+                "Very few corruptions have been specified or created from data drift. "
+                "Scale drift will be added for all features individually."
+            )
             continous_feats = self.dataset_schema.continuous_feats + self.dataset_schema.discrete_feats
             for f in continous_feats:
                 self.corruptions.extend(self._create_scale_drift(feature=f))
@@ -170,7 +171,7 @@ class PerformancePredictor:
                 binary_columns=[]
             )
         else:
-            self.dataset_schema = DataSchema().generate(X)
+            self.dataset_schema = DataSchema().generate(X, verbose=False)
 
     def _create_corruptions_from_data_drift(self, X_source, X_target):
         """

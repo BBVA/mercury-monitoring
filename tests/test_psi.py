@@ -2,6 +2,7 @@ from mercury.monitoring.drift.metrics import psi
 import numpy as np
 import pytest
 
+
 def test_psi():
     # Basic Test
     a = np.array([12, 11, 14, 12, 12, 10, 12, 6, 6, 5])
@@ -19,6 +20,7 @@ def test_psi():
     # Autoinfer that should normalize
     big_psi2 = psi(a, b, normalize=None)
     assert big_psi1 == big_psi2
+
 
 def test_psi_normalize_false():
     a = np.array([0.12, 0.11, 0.14, 0.12, 0.12, 0.1 , 0.12, 0.06, 0.06, 0.05])
@@ -41,6 +43,7 @@ def test_psi_special_case():
     psi2 = psi(a, b, normalize=True, eps=0)
     assert np.isnan(psi2)
 
+
 def test_psi_bad_inputs():
     a = np.array([[0, 11, 0, 13, 12, 10, 12, 6, 6, 5]])
     b = np.array([[11, 0, 0, 13, 11, 11, 13, 5, 7, 6]])
@@ -53,3 +56,10 @@ def test_psi_bad_inputs():
 
     with pytest.raises(ValueError):
         psi1 = psi(a, b, normalize=True, eps=1e-4)
+
+
+if __name__ == "__main__":
+    test_psi()
+    test_psi_normalize_false()
+    test_psi_special_case()
+    test_psi_bad_inputs()

@@ -18,12 +18,14 @@ def test_hellinger():
     dist2 = hellinger_distance(p,q)
     assert dist2 < dist1
 
+
 def test_hellinger_max_distance():
     # Test gives max hellinger distance which is sqrt(2)
     p = np.array([1,0,1])
     q = np.array([0,1,0])
 
     assert approx(hellinger_distance(p,q), rel=0.001) == np.sqrt(2)
+
 
 def test_hellinger_min_distance():
     # Test gives min hellinger distance which is 0
@@ -32,11 +34,13 @@ def test_hellinger_min_distance():
 
     assert hellinger_distance(p,q) == 0
 
+
 def test_hellinger_normalize_false():
     p = np.array([0.5,0.5])
     q = np.array([0.5,0.5])
 
     assert hellinger_distance(p,q, normalize=False) == 0
+
 
 def test_hellinger_exceptions():
 
@@ -45,3 +49,11 @@ def test_hellinger_exceptions():
     q = np.array([0.5, 0.5])
     with pytest.raises(Exception):
         hellinger_distance(p, q)
+
+
+if __name__ == "__main__":
+    test_hellinger()
+    test_hellinger_max_distance()
+    test_hellinger_min_distance()
+    test_hellinger_normalize_false()
+    test_hellinger_exceptions()
